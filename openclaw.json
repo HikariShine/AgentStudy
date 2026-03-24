@@ -1,0 +1,686 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.3.13",
+    "lastTouchedAt": "2026-03-18T15:43:53.443Z"
+  },
+  "wizard": {
+    "lastRunAt": "2026-03-18T15:43:53.224Z",
+    "lastRunVersion": "2026.3.13",
+    "lastRunCommand": "configure",
+    "lastRunMode": "local"
+  },
+  "browser": {
+    "enabled": true,
+    "remoteCdpTimeoutMs": 1500,
+    "remoteCdpHandshakeTimeoutMs": 3000,
+    "color": "#FF4500",
+    "headless": false,
+    "attachOnly": false,
+    "defaultProfile": "openclaw",
+    "profiles": {
+      "chrome": {
+        "cdpPort": 18792,
+        "driver": "extension",
+        "attachOnly": true,
+        "color": "#0066CC"
+      },
+      "openclaw": {
+        "cdpPort": 18800,
+        "color": "#FF4500"
+      }
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "openai": {
+        "baseUrl": "/v1",
+        "apiKey": "",
+        "models": []
+      },
+      "google": {
+        "baseUrl": "/v1beta",
+        "apiKey": "",
+        "models": []
+      },
+      "moonshot": {
+        "baseUrl": "/v1",
+        "apiKey": "",
+        "models": []
+      },
+      "newapi": {
+        "baseUrl": "/v1",
+        "apiKey": "",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "glm-5",
+            "name": "GLM-5",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 200000,
+            "maxTokens": 32768
+          },
+          {
+            "id": "qwen3.5-plus",
+            "name": "Qwen 3.5 Plus",
+            "reasoning": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 200000,
+            "maxTokens": 32768
+          },
+          {
+            "id": "kimi-k2.5",
+            "name": "Kimi K2.5",
+            "reasoning": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 200000,
+            "maxTokens": 32768
+          },
+          {
+            "id": "MiniMax-M2.5",
+            "name": "MiniMax M2.5",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 200000,
+            "maxTokens": 32768
+          },
+          {
+            "id": "gemini-3.1-pro-preview",
+            "name": "Gemini 3.1 Pro Preview",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 200000,
+            "maxTokens": 32768
+          },
+          {
+            "id": "gemini-3.1-flash-image-preview",
+            "name": "Gemini 3.1 Flash Image Preview",
+            "reasoning": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 200000,
+            "maxTokens": 32768
+          },
+          {
+            "id": "gemini-3-pro-preview",
+            "name": "Gemini 3 Pro Preview",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 200000,
+            "maxTokens": 32768
+          },
+          {
+            "id": "gemini-3-pro-image-preview",
+            "name": "Gemini 3 Pro Image Preview",
+            "reasoning": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 200000,
+            "maxTokens": 32768
+          },
+          {
+            "id": "gemini-3-flash-preview",
+            "name": "Gemini 3 Flash Preview",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 200000,
+            "maxTokens": 32768
+          },
+          {
+            "id": "gpt-5.3-codex",
+            "name": "GPT-5.3 Codex",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 200000,
+            "maxTokens": 32768
+          },
+          {
+            "id": "gpt-5.2-codex",
+            "name": "GPT-5.2 Codex",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 200000,
+            "maxTokens": 32768
+          },
+          {
+            "id": "gpt-5-codex",
+            "name": "GPT-5 Codex",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 200000,
+            "maxTokens": 32768
+          },
+          {
+            "id": "gpt-5.2",
+            "name": "GPT-5.2",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 200000,
+            "maxTokens": 32768
+          },
+          {
+            "id": "gpt-5.4",
+            "name": "GPT-5.4",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 200000,
+            "maxTokens": 32768
+          },
+          {
+            "id": "gemini-3-pro-image-preview",
+            "name": "Gemini 3 Pro Image Preview",
+            "contextWindow": 200000,
+            "maxTokens": 32768
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "newapi/kimi-k2.5"
+      },
+      "imageModel": {
+        "primary": "newapi/kimi-k2.5",
+        "fallbacks": [
+          "newapi/gemini-flash-img",
+          "newapi/qwen3.5-plus"
+        ]
+      },
+      "models": {
+        "newapi/MiniMax-M2.5": {
+          "alias": "minimax"
+        },
+        "newapi/gemini-3-flash-preview": {
+          "alias": "gemini3-flash"
+        },
+        "newapi/gemini-3-pro-image-preview": {
+          "alias": "gemini3-pro-img"
+        },
+        "newapi/gemini-3-pro-preview": {
+          "alias": "gemini3-pro"
+        },
+        "newapi/gemini-3.1-flash-image-preview": {
+          "alias": "gemini-flash-img"
+        },
+        "newapi/gemini-3.1-flash-lite-preview": {
+          "alias": "gemini-lite"
+        },
+        "newapi/gemini-3.1-pro-preview": {
+          "alias": "gemini-pro"
+        },
+        "newapi/glm-5": {
+          "alias": "glm5",
+          "params": {
+            "thinking": {
+              "type": "enabled"
+            }
+          }
+        },
+        "newapi/gpt-5-codex": {
+          "alias": "gpt5-codex"
+        },
+        "newapi/gpt-5.2": {
+          "alias": "gpt52"
+        },
+        "newapi/gpt-5.2-codex": {
+          "alias": "gpt52-codex"
+        },
+        "newapi/gpt-5.3-codex": {
+          "alias": "gpt53-codex"
+        },
+        "newapi/gpt-5.4": {
+          "alias": "gpt54"
+        },
+        "newapi/kimi-k2.5": {
+          "alias": "kimi",
+          "params": {
+            "thinking": {
+              "type": "enabled"
+            }
+          }
+        },
+        "newapi/qwen3.5-plus": {
+          "alias": "qwen"
+        }
+      },
+      "workspace": "/home/shine/.openclaw/workspace",
+      "memorySearch": {
+        "enabled": true,
+        "provider": "gemini",
+        "remote": {
+          "baseUrl": "/v1beta",
+          "apiKey": ""
+        }
+      },
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "thinkingDefault": "medium",
+      "heartbeat": {
+        "every": "10m",
+        "includeReasoning": true,
+        "target": "feishu",
+        "accountId": "pulse",
+        "to": "oc_",
+        "session": "agent:main:feishu:direct:ou_"
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      }
+    }
+  },
+  "tools": {
+    "profile": "coding",
+    "alsoAllow": [
+      "browser"
+    ],
+    "web": {
+      "search": {
+        "enabled": true,
+        "provider": "brave",
+        "apiKey": ""
+      }
+    },
+    "media": {
+      "concurrency": 2,
+      "audio": {
+        "enabled": true,
+        "maxBytes": 20971520,
+        "maxChars": 500,
+        "echoTranscript": true,
+        "echoFormat": "🎤 音频内容：\n{transcript}",
+        "attachments": {
+          "mode": "all",
+          "maxAttachments": 3
+        },
+        "language": "zh",
+        "models": [
+          {
+            "provider": "openai",
+            "model": "gpt-4o-mini-transcribe",
+            "capabilities": ["audio"],
+            "baseUrl": "/v1",
+            "timeoutSeconds": 90
+          },
+          {
+            "provider": "google",
+            "model": "gemini-3-flash-preview",
+            "capabilities": ["audio"],
+            "baseUrl": "/v1beta",
+            "timeoutSeconds": 120
+          }
+        ]
+      },
+      "video": {
+        "enabled": true,
+        "maxBytes": 52428800,
+        "maxChars": 800,
+        "attachments": {
+          "mode": "first",
+          "maxAttachments": 1
+        },
+        "models": [
+          {
+            "provider": "moonshot",
+            "model": "kimi-k2.5",
+            "capabilities": ["video"],
+            "baseUrl": "/v1",
+            "timeoutSeconds": 150
+          },
+          {
+            "provider": "google",
+            "model": "gemini-3-flash-preview",
+            "capabilities": ["video"],
+            "baseUrl": "/v1beta",
+            "timeoutSeconds": 180
+          }
+        ]
+      }
+    }
+  },
+  "bindings": [
+    {
+      "agentId": "main",
+      "match": {
+        "channel": "feishu",
+        "accountId": "default"
+      }
+    },
+    {
+      "agentId": "main",
+      "match": {
+        "channel": "discord",
+        "accountId": "default"
+      }
+    }
+  ],
+  "messages": {
+    "ackReactionScope": "group-mentions",
+    "tts": {
+      "auto": "tagged",
+      "provider": "openai",
+      "elevenlabs": {
+        "apiKey": "sk_"
+      },
+      "openai": {
+        "apiKey": "",
+        "baseUrl": "/v1"
+      },
+      "edge": {
+        "enabled": true,
+        "voice": "zh-CN-XiaoxiaoNeural",
+        "lang": "zh-CN"
+      }
+    }
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "session": {
+    "dmScope": "per-channel-peer"
+  },
+  "hooks": {
+    "internal": {
+      "enabled": true,
+      "entries": {
+        "boot-md": {
+          "enabled": true
+        },
+        "bootstrap-extra-files": {
+          "enabled": true
+        },
+        "command-logger": {
+          "enabled": true
+        },
+        "session-memory": {
+          "enabled": true
+        }
+      }
+    }
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "pairing",
+      "botToken": "",
+      "groupPolicy": "allowlist",
+      "streaming": "partial"
+    },
+    "discord": {
+      "enabled": true,
+      "token": "",
+      "groupPolicy": "allowlist",
+      "streaming": "off",
+      "guilds": {
+        "*": {
+          "channels": {
+            "support": {
+              "allow": true
+            }
+          }
+        },
+        "14805": {
+          "requireMention": false,
+          "users": [
+            "1455"
+          ]
+        }
+      }
+    },
+    "feishu": {
+      "enabled": true,
+      "defaultAccount": "default",
+      "accounts": {
+        "default": {
+          "enabled": true,
+          "name": "default",
+          "appId": "cli_",
+          "appSecret": "",
+          "domain": "feishu",
+          "connectionMode": "websocket",
+          "groupPolicy": "allowlist",
+          "groupAllowFrom": ["oc_xxx","oc_yyy", "oc_zzz"],
+          "groups": {
+            "oc_xxx": {
+              "allowFrom": ["ou_"],
+              "requireMention": false
+            },
+            "oc_yyy": {
+              "allowFrom": ["ou_"],
+              "requireMention": false
+            },
+            "oc_zzz": {
+              "allowFrom": ["ou_"],
+              "requireMention": false
+            }
+          }
+        },
+        "pulse": {
+          "enabled": true,
+          "name": "pulse",
+          "appId": "cli_",
+          "appSecret": "",
+          "domain": "feishu",
+          "connectionMode": "websocket",
+          "allowFrom": [],
+          "groupPolicy": "allowlist",
+          "groupAllowFrom": ["oc_xxx"],
+          "groupSenderAllowFrom": [],
+          "groups": {
+            "oc_xxx": {
+              "allowFrom": ["ou_"],
+              "requireMention": false,
+              "enabled": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": ""
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    },
+    "nodes": {
+      "denyCommands": [
+        "camera.snap",
+        "camera.clip",
+        "screen.record",
+        "contacts.add",
+        "calendar.add",
+        "reminders.add",
+        "sms.send"
+      ]
+    }
+  },
+  "skills": {
+    "install": {
+      "nodeManager": "npm"
+    },
+    "entries": {
+      "nano-banana-pro": {
+        "env": {
+          "GEMINI_API_KEY": "",
+          "GEMINI_BASE_URL": ""
+        }
+      },
+      "openai-image-gen": {
+        "env": {
+          "OPENAI_API_KEY": "sk-",
+          "OPENAI_BASE_URL": ""
+        }
+      },
+      "openai-whisper-api": {
+        "env": {
+          "OPENAI_API_KEY": "sk-",
+          "OPENAI_BASE_URL": ""
+        }
+      },
+      "sag": {
+        "apiKey": "",
+        "env": {
+          "ELEVENLABS_API_KEY": ""
+        }
+      },
+      "my-wechat-publish": {
+        "env": {
+          "WECHAT_APP_ID": "",
+          "WECHAT_APP_SECRET": ""
+        }
+      },
+      "video-downloader-analyzer": {
+        "env": {
+          "GEMINI_API_KEY": "sk-",
+          "GEMINI_BASE_URL": ""
+        }
+      }
+    }
+  },
+  "plugins": {
+    "load": {
+      "paths": [
+        "/home/shine/openclaw/extensions/feishu"
+      ]
+    },
+    "entries": {
+      "discord": {
+        "enabled": true
+      },
+      "feishu": {
+        "enabled": true
+      },
+      "telegram": {
+        "enabled": true
+      }
+    }
+  }
+}
