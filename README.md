@@ -190,6 +190,34 @@ models指定可用模型有哪些，defaults.model指定默认使用哪个模型
 
 配置详解：
 
+
+## OpenClaw获取实时信息
+
+我们知道大模型的知识库一般都距离现实时间有半年的差距，当我们需要获取一些实时信息时，需要让他有搜索互联网的能力。OpenClaw自带web搜索工具，参考： https://docs.openclaw.ai/tools/web
+
+目前的搜索提供商有很多，官方推荐使用 brave search。
+
+去 https://brave.com 注册账号，每个月有 1000 词免费搜索额度，一般都是够用的。这里 https://brave.com/search/api/ 生成 apikey，然后修改配置：
+
+```
+{
+  "tools": {
+    "web": {
+      "search": {
+        "enabled": true,
+        "provider": "brave",
+        "apiKey": ""
+      }
+    }
+  }
+}
+```
+使用命令行配置：
+
+使用向导配置：openclaw configure --section web
+
+当然你也可以使用baidu搜索，不过内置支持，需要我们安装skill，去 https://clawhub.com/ 找到 baidu 的skill 安装即可(也可以让OpenClaw自己去找然后安装)
+
 ## OpenClaw看懂图片
 
 要让OpenClaw看懂图片很简单，只需要一个支持多模态的模型即可，可以查看你的模型提供商，哪个模型支持多模态视觉理解，只需要在models.providers[name].models[].input 数组里为那个模型添加 image 即可，OpenClaw会自动识别并使用该功能。
@@ -521,6 +549,22 @@ OpenClaw
 
 这个识别依赖 gemini 模型，暂时还不支持其他模型，后续会新增 kimi-k2.5 支持，不过这些模型依赖文件上传，需要公网有一个可以放视频的地方，使用起来略复杂。
 
+配置：
+```
+{
+  "skills": {
+    "entries": {
+      "my-wechat-publish": {
+        "env": {
+          "WECHAT_APP_ID": "wx57de550053a1bbed",
+          "WECHAT_APP_SECRET": "97de37c8b82d2aa556063068f134cae3"
+        }
+      }
+    }
+  }
+}
+```
+
 ## OpenClaw制作视频
 
 要想让OpenClaw制作视频，需要使用相关的Skill。由于豆包收费比较贵，免费能生成视频的，有NotebookLM，我们直接拿这个来看看功能。
@@ -540,24 +584,347 @@ NotebookLM是google出品，通过该平台，我们可以输入一系列笔记�
 
 安装完成后，直接给他提示：使用notebooklm生成视频，生成xxx相关内容的文档，添加到notebooklm中，并生成视频。
 
-## OpenClaw使用浏览器上网
+## OpenClaw使用浏览器
 
-## 综合应用
+OpenClaw自带浏览器操作支持，有两种方式：插件和独立profile
 
-### 自动发布公众号
+相关配置内容：
+```
+{
+  "browser": {
+    "enabled": true,
+    "remoteCdpTimeoutMs": 1500,
+    "remoteCdpHandshakeTimeoutMs": 3000,
+    "color": "#FF4500",
+    "headless": false,
+    "attachOnly": false,
+    "defaultProfile": "openclaw",
+    "profiles": {
+      "chrome": {
+        "cdpPort": 18792,
+        "driver": "extension",
+        "attachOnly": true,
+        "color": "#0066CC"
+      },
+      "openclaw": {
+        "cdpPort": 18800,
+        "color": "#FF4500"
+      }
+    }
+  }
+}
+```
 
-这个可以插入到会画画之后
+浏览器工具默认关闭，需要通过配置打开：
+```
+{
+  "tools": {
+    "alsoAllow": [
+      "browser"
+    ]
+  }
+}
+```
 
-### 自动发布B站视频
+### 通过chrome扩展程序
 
-这个放到制作视频之后
+安装方式：(补全内容)
 
-### 记住重要的事情
+在配置文件中，chrome部分就是extension方式，安装完插件后，打开浏览器，打开网页，然后点击插件开启，此时就可以使用 extension 方式操作浏览器了
 
-### 回忆历史
+这个局限是新开的tab页无法操作，只能操作之前打开的，不过也有好处，就是你可以操作登录之后，让 openclaw 再继续操作，不易触发风控。
 
-session-log与memory-search
+### 通过cdp协议
 
-### 让OpenClaw主动干活
+配置中openclaw部分，这个会打开一个新的浏览器profile，完全独立，cookie也和你主浏览器不同。浏览器操作会结合网页内容和截图，通过大模型判断如何进行下一步操作，所以这个很吃token。
 
-### 进阶：让你的OpenClaw自己提交Issue和PR
+也可以使用 agent-browser 这个skill，来安装agent专用浏览器，降低token消耗。
+
+### 更新
+
+新版本OpenClaw(2026.03.23)已经不再支持chrome扩展程序，都是通过cdp操作，默认内置两套profile。user就是用户平时使用的浏览器profile，openclaw和原来一致，会开新profile。
+
+配置内容如下：
+```
+{
+  "browser": {
+    "profiles": {
+      "user": {
+        "cdpPort": 18792,
+        "driver": "existing-session",
+        "color": "#0066CC"
+      }
+    }
+  }
+}
+```
+不过浏览器配置都是不用在配置文件中添加的，默认就有。
+
+## 记住重要的事情
+
+agent的每个session之间，上下文不共享。但如果你有一些想让session共享的事情，如何处理呢？可以直接通过chat告诉OpenClaw：记住xxx，例如你可以告诉你日常的工作目录是xxx，让他生成文件都放到这个目录里等
+
+写入记忆的内容，会放到 ~/.openclaw/workspace/MEMORY.md 中。
+
+另外还有 AGENTS.md
+
+HEARTBEAT.md
+
+IDENTITY.md
+
+SOUL.md
+
+TOOLS.md
+
+USER.md
+
+这几个文件的作用，补一下
+
+## 追忆过去
+
+每个session有自己独立的上下文，而全局记忆又有限，当我们想要找到历史上的一些对话或者记忆时，要怎么处理呢？
+
+OpenClaw自身会记录一些记忆到 ~/.openclaw/workspace/memory 下面，他们是按日期命名的，但这里面都是纯文本，记录的是OpenClaw总结过的部分记忆内容。
+
+要想在这里面找到相关记忆，需要使用 memory_search和memory_get 这两个内置工具。这两个工具能启用的前提是，我们需要一个能做词嵌入的模型，以便实现RAG检索。配置：
+```
+{
+  "agents": {
+    "defaults": {
+      "memorySearch": {
+        "enabled": true,
+        "provider": "gemini",
+        "remote": {
+          "baseUrl": "/v1beta",
+          "apiKey": ""
+        }
+      }
+    }
+  }
+}
+```
+这里默认使用gemini的gemini-embedding-001模型做词嵌入，还支持其他模型（补全其他配置）
+
+关于记忆详细参考：https://docs.openclaw.ai/concepts/memory 和 https://docs.openclaw.ai/reference/memory-config 
+
+上面的记忆是提炼后的内容，如果我们想要原始的session记录，还需要配置hooks。
+
+在OpenClaw onboarding配置过程中，我们可以看到一个hooks配置，这里一般全部勾选接口。（补全hooks介绍）
+
+其中有一个 session-memory，当您发出/new或/reset时，将会话上下文保存到您的代理工作区（默认）。还有个 ~/.openclaw/agents/<agentId>/sessions/ 目录，保存的是所有sessions的详细记录。
+
+我们启用这个 hook，还需要启用 session-logs 这个skill
+- which jq || brew install jq
+- which rg || brew install ripgrep
+
+安装这两个依赖后，session-logs 会自动启用，此时如果你让OpenClaw找到历史记忆，他就会自动使用 session-logs 这个 skill 和 memory-search 功能完成搜索了。
+
+
+### 其他hooks作用
+
+默认的四个hooks是：
+
+- 📎 bootstrap-extra-files：在启动过程中，根据配置的 glob/路径模式注入额外的工作区引导文件agent:bootstrap
+- 📝 command-logger：将所有命令事件记录到~/.openclaw/logs/commands.log
+- 🚀 boot-md：BOOT.md ：网关启动时运行（需要启用内部钩子）
+
+补全作用说明
+
+# 综合应用
+
+## 自动发布公众号
+(备注，这篇文章要在配置好图片生成后发)
+
+要发布公众号，我们需要使用skill，添加 my-wechat-publish 这个skill(仓库内)，同时配置微信公众号 appId和secret：
+
+```
+{
+  "skills": {
+    "entries": {
+      "my-wechat-publish": {
+        "env": {
+          "WECHAT_APP_ID": "wx",
+          "WECHAT_APP_SECRET": ""
+        }
+      }
+    }
+  }
+}
+```
+
+同时这个skill依赖wenyan-cli，安装前使用 npm install -g @wenyan-md/cli 安装(这个需要root权限，所以可以先自己手动安装)
+
+之后我们就可以提供提示词来生成文章了，如下：帮我根据xxx日期的记忆，生成一篇微信公众号文章，标题是Claw养成日记1，并给文章和正文篇章配图
+
+这个skill就会自动使用我们的生图功能，来生成文章，最终会推送到公众号的草稿箱，个人订阅号没有api发布功能，所以需要自己手动发布，可以下载公众号助手，确认内容后点击发布。
+
+## 自动发布B站视频
+
+下面我们结合 Notebooklm这个skill和发布视频的skill，完成自动发布B站视频功能
+
+需要安装 biliup-skills，用来发布视频。这个功能依赖 biliup 和 qr，先使用 uv 安装：
+
+```
+uv tool install biliup
+uv tool install qrcode[pil]
+```
+
+然后我们要先登录，可以手动登录测试一下：
+```
+mkdir -p ~/.biliup/ & cd ~/.biliup/
+biliup login
+```
+按照指引扫码登录即可
+
+登录完成后我们就可以使用技能发布视频了：使用notebooklm根据文章xxx，生成一个视频，并把这个视频发布到B站。静待发布完成即可(可能会失败，B站投稿风控会跳验证码，多登录几天就会解除风控)
+
+## 让OpenClaw主动干活
+
+上面所有内容，都是需要主动找OpenClaw聊天的，那假设我们想让他自己主动找活干，或者想让他定时做一些事情，要怎么做呢？
+
+OpenClaw有两个机制可以实现这个功能：定时任务和心跳机制 
+
+### 定时任务
+
+例如每天晚上11点30分，总结当天的工作和明天的待办，推送给我的飞书，这个时候OpenClaw会自动使用cron工具创建定时任务
+
+不过这个要注意，只有webchat也就是OpenClaw的网页默认有cron工具的权限，需要用webchat来添加定时任务。
+
+另外注意这个消息推送时每个推送消息都是一个独立的session，直接回复OpenClaw是不知道刚才的消息内容的，所以这里定时任务只能执行操作后做通知。除非配置定时任务绑定到某个session。一般建议是独立session，仅做通知。
+
+### 心跳机制
+
+详解心跳机制。
+
+我们可以让他定期例如每30分钟(默认心跳时常)，在某个session上下文中执行某些任务，你可以立即为我们每30分钟主动发了条消息给OpenClaw，然后OpenClaw执行我们的指令。
+
+我这里配置了每次心跳时，执行QQ邮箱和gmail的检查，有未读邮件时通过飞书通知我，配置如下：
+```
+{
+  "agents": {
+    "defaults": {
+      "heartbeat": {
+        "every": "10m",
+        "includeReasoning": true,
+        "target": "feishu",
+        "accountId": "pulse",
+        "to": "oc_",
+        "session": "agent:main:feishu:direct:ou_",
+      },
+    }
+  }
+}
+```
+这里这个配置表示每10分钟心跳一次，消息发送到feishu渠道，使用pulse账号，发送给oc_用户(我这里是个群)，固定session。
+
+同时这里为了能够查阅邮件，我使用了两个内置的skill：
+
+#### gog
+
+https://github.com/openclaw/openclaw/blob/main/skills/gog/SKILL.md，这个skill用于链接google账号，可以实现检查邮件，上传文件等操作。
+
+需要安装gog-cli依赖，使用 brew install gog 安装
+
+然后按照这个说明，一步步完成操作，最后下载 client_secret.json 文件：https://github.com/steipete/gogcli
+
+```
+mkdir -p ~/.gog & cd ~/.gog
+gog auth credentials ./client_secret.json
+gog auth add you@gmail.com --services gmail,calendar,drive,contacts,docs,sheets
+```
+此时gog就启用了，可以测试下使用gog检查新邮件功能。
+
+#### himalaya
+
+上面的gog仅支持google邮箱，如果我想收国内的邮箱要怎么处理呢？下面以qq邮箱为例，我们配置himalaya skill。
+
+brew install himalaya
+
+安装完成后，新增配置：nano ~/.config/himalaya/config.toml
+```
+[accounts.qq]
+email = "xxx@qq.com"
+display-name = "xxx"
+default = true
+
+backend.type = "imap"
+backend.host = "imap.qq.com"
+backend.port = 993
+backend.encryption.type = "tls"
+backend.login = "xxx@qq.com"
+backend.auth.type = "password"
+backend.auth.raw = "xxx"
+
+message.send.backend.type = "smtp"
+message.send.backend.host = "smtp.qq.com"
+message.send.backend.port = 587
+message.send.backend.encryption.type = "start-tls"
+message.send.backend.login = "xxx@qq.com"
+message.send.backend.auth.type = "password"
+message.send.backend.auth.raw = "xxx"
+```
+这里的 backend.auth.raw 内容，要去 QQ 邮箱设置里，开启SMTP功能那里获取。
+
+### 两者的区别
+
+根据文档 https://docs.openclaw.ai/automation/cron-vs-heartbeat 描述区别
+
+## 进阶：让你的OpenClaw自己提交Issue和PR
+
+在整个安装过程中，发现了很多OpenClaw的小bug，比如操作和文档说明不一致。看了下OpenClaw仓库的贡献要求，他说环境使用AI提交。这下好了，直接让我的OpenClaw给自己提Issue，再提pr就行了。
+
+我们首先要安装 github 工具，这个skill也是内置的，只需要安装依赖就能打开：
+
+```
+brew install gh
+gh auth
+```
+执行后会给一个链接，浏览器打开这个链接，完成授权即可。
+
+后面我们就可以用 OpenClaw 给自己提Issue和PR了。
+
+参考：https://github.com/openclaw/openclaw/issues/45244 和 https://github.com/openclaw/openclaw/pull/48075
+
+提示词可以明确一点，例如：参考 上面的issue，提一个新issue，内容是 xxxx，现象是xxxxx，修复建议xxxxxx。使用英文格式。
+
+如果你有修复方案，可以按照 contributing 说明，先把 openclaw 仓库，fork到个人名下，然后开新分支，修改代码，然后推送到自己仓库的远程。再提交pr，把自己仓库的xxx分支mr到openclaw仓库的主分支，生成pr，信息按照 https://github.com/openclaw/openclaw/pull/48075 格式生成。提交pr后把这个pr关联到之前生成的issue里。
+
+提示词可以明确一点如何修复，也可以让他先提供修复方案，等你确认后再提交推送。
+
+上面步骤可以分成几次执行，不要一次让他执行很多，可能会出现意料外的情况。
+
+# 其他小tips
+
+## 更新OpenClaw版本
+
+openclaw update
+
+更新完成后执行 openclaw doctor --fix，检查配置是否有问题，同时他也能迁移旧版本的配置到新版本
+
+## 打开thinking模式
+
+打开模型的推理思考能力，可以提高准确率，但会增加token消耗。如果不缺token或者不缺钱，又对准确率有要求，可以通过配置打开深度思考模式，
+
+第一种是全局配置: agents.defaults.thinkingDefault，有low,medium,high等级别(补全)，可以修改默认的level
+
+第二种session级别配置：聊天内输入 /think mediun(或者其他级别)，可以单独调整当前session的thinking level
+
+## 观察详细响应
+
+有时候我们一个问题过去，会把OpenClaw整懵，很久不回复，这种一般都是进入循环了，他在尝试各种方法来达到最终的目的。如果我们想看详细的内容，可以通过这种方式打开详细响应：
+
+- /v on 或者 /verbose on ，打开啰嗦模式
+- /reason on 打开推理模式并显示思考内容
+
+当然如果你觉得有时候他直接执行不符合你的预期，你可以先让他给你方案然后等你确认再执行，这个可以写入全局记忆。
+
+
+## Skill为何没生效？
+
+使用命令 openclaw skills 查看所有的skill，看你的skill第一例是否是missing。如果是missing则表示
+
+如果还是不生效，可以使用 openclaw gateway restart 重启，再使用 /new 新建session，确保全局提示词中存在skill信息。
+
+## 单独执行某个配置
+
+使用 openclaw configure --section web 可以单独执行某节的配置向导。
