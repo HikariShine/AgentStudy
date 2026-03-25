@@ -246,6 +246,8 @@ models指定可用模型有哪些，defaults.model指定默认使用哪个模型
 
 本次学习skill的使用
 
+### 使用skill实现
+
 之前OpenClaw只能使用skill来完成，OpenClaw内置了两个图片生成的skill：
 
 - nano-banana-pro 使用geimini 
@@ -280,6 +282,8 @@ models指定可用模型有哪些，defaults.model指定默认使用哪个模型
 
 使用提示词配置：
 
+### 内置实现
+
 在新版OpenClaw中，删除了内置的nano-banana-pro skill，直接把生图功能做成基础支持了，类似于图片理解的配置，只需要配置：
 
 ```
@@ -296,6 +300,152 @@ models指定可用模型有哪些，defaults.model指定默认使用哪个模型
 使用命令行配置：
 
 使用提示词配置：
+
+#### 缺陷
+
+在配置内置实现后，发现该功能有问题，只能使用标准的provider，也就是provider必须是google这个名字才能生效，其限制来源：
+
+src/image-generation/runtime.ts 中的 generateImage 方法 使用了 getImageGenerationProvider 获取provider(有provider才知道怎么调用)
+
+这里调用了 src/image-generation/provider-registry.ts 中的 buildProviderMaps 方法，构建所有provider
+
+for (const provider of BUILTIN_IMAGE_GENERATION_PROVIDERS) {
+  register(provider);
+}
+for (const provider of resolvePluginImageGenerationProviders(cfg)) {
+  register(provider);
+}
+
+function resolvePluginImageGenerationProviders(
+  cfg?: OpenClawConfig,
+): ImageGenerationProviderPlugin[] {
+  const active = getActivePluginRegistry();
+  const registry =
+    (active?.imageGenerationProviders?.length ?? 0) > 0 || getActivePluginRegistryKey() || !cfg
+      ? active
+      : loadOpenClawPlugins({ config: cfg });
+  return registry?.imageGenerationProviders?.map((entry) => entry.provider) ?? [];
+}
+
+第一部分常量为空，所以主要是第二部分的插件。
+
+在 2026.03.22 版本，OpenClaw重构了插件体系，现在很多内置实现都使用了插件逻辑，这里对于ImageGeneration功能，也是通过插件注册了，当前有两个内置启用的插件(openclaw plugins list查看)有这个功能，分别是google和openai
+
+以google为例，逻辑在 extensions/google/image-generation-provider.ts 中
+
+    async generateImage(req) {
+      const auth = await resolveApiKeyForProvider({
+        provider: "google",
+        cfg: req.cfg,
+        agentDir: req.agentDir,
+        store: req.authStore,
+      });
+      if (!auth.apiKey) {
+        throw new Error("Google API key missing");
+      }
+
+      const model = normalizeGoogleImageModel(req.model);
+      const baseUrl = normalizeBaseUrl(resolveGoogleBaseUrl(req.cfg), DEFAULT_GOOGLE_API_BASE_URL);
+      const allowPrivate = Boolean(req.cfg?.models?.providers?.google?.baseUrl?.trim());
+      const authHeaders = parseGeminiAuth(auth.apiKey);
+      const headers = new Headers(authHeaders.headers);
+      const imageConfig = mapSizeToImageConfig(req.size);
+      const inputParts = (req.inputImages ?? []).map((image) => ({
+        inlineData: {
+          mimeType: image.mimeType,
+          data: image.buffer.toString("base64"),
+        },
+      }));
+      const resolvedImageConfig = {
+        ...imageConfig,
+        ...(req.aspectRatio?.trim() ? { aspectRatio: req.aspectRatio.trim() } : {}),
+        ...(req.resolution ? { imageSize: req.resolution } : {}),
+      };
+
+      const { response: res, release } = await postJsonRequest({
+        url: `${baseUrl}/models/${model}:generateContent`,
+        headers,
+        body: {
+          contents: [
+            {
+              role: "user",
+              parts: [...inputParts, { text: req.prompt }],
+            },
+          ],
+          generationConfig: {
+            responseModalities: ["TEXT", "IMAGE"],
+            ...(Object.keys(resolvedImageConfig).length > 0
+              ? { imageConfig: resolvedImageConfig }
+              : {}),
+          },
+        },
+        timeoutMs: 60_000,
+        fetchFn: fetch,
+        allowPrivateNetwork: allowPrivate,
+      });
+  // 省略内容
+}
+可以看到他这里固定使用了 provider: "google" 作为provider name去找对应的provider，同时模型也会用对应的provider的，传入了模型则会用传入模型的，但是前提都是对应provider上要有这个模型。默认模型是 gemini-3.1-flash-image-preview 。
+
+所以这里我们要在google上配置 gemini-3.1-flash-image-preview 模型才能正常使用。同样的openai的则是 gpt-image-1 默认模型，我们可以把这两个都配置到对应的provider中，就能实现默认图像生成功能了。
+
+参考配置：
+```
+{
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "openai": {
+        "baseUrl": "http",
+        "apiKey": "sk-",
+        "models": [
+          {
+            "id": "gpt-image-1",
+            "name": "OpenAI Image",
+            "reasoning": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 200000,
+            "maxTokens": 32768
+          }
+        ]
+      },
+      "google": {
+        "baseUrl": "http",
+        "apiKey": "sk-",
+        "models": [
+          {
+            "id": "gemini-3.1-flash-image-preview",
+            "name": "Gemini 3.1 Flash Image Preview",
+            "reasoning": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 200000,
+            "maxTokens": 32768
+          }
+        ]
+      }
+    }
+  }
+}
+```
+最后再把imageGenerationModel改成上面的任一个模型即可
 
 ## OpenClaw开口说话
 
