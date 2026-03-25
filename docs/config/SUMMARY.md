@@ -445,7 +445,10 @@ function resolvePluginImageGenerationProviders(
   }
 }
 ```
-最后再把imageGenerationModel改成上面的任一个模型即可
+最后再把imageGenerationModel改成上面的任一个模型，除此之外还需要做一件事情，这个imageGeneration支持，需要启用google插件，默认虽然有这个插件，但是一定要显式打开，否则还是不能正常生效：
+```
+plugins.entries.google.enabled: true
+```
 
 ## OpenClaw开口说话
 

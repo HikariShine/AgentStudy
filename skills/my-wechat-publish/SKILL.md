@@ -193,7 +193,7 @@ cover: ./assets/cover.jpg                         # ❌ 相对路径可能出错
 
 **如果用户需要配图：**
 1. 根据文章标题和内容，生成合适的图片描述 prompt
-2. 调用用户提供的**生图 skill**（如 nano-banana-pro、openai-image-gen 等）生成图片
+2. 调用用户提供的**生图功能**（如内置的image-generate或者 nano-banana-pro、openai-image-gen 等技能）生成图片
 3. 将生成的图片保存到文章目录，使用**绝对路径**引用
 4. 封面图设置到 frontmatter 的 `cover` 字段
 5. 正文插图在合适位置插入 `![描述](绝对路径)`
