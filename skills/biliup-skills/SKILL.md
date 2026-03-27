@@ -121,6 +121,9 @@ biliup -u ${HOME}/.biliup/cookies.json upload \
 **上传线路**（可选，若用户要求速度优化）：
 `--line` 可选 `bda2`（默认）、`ws`、`qn`、`tx`、`txa`
 
+**上传方式** (一个方式失败时可以换另一个方式)
+`--submit` 可选 `app`(默认)、 `web`, `b-cut-android`
+
 运行投稿命令时：
 - 告知用户"投稿中，请稍候..."
 - 等待命令完成（timeout 300s）
