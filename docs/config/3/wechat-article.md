@@ -1,6 +1,7 @@
-# 第2课：让它开口说话——飞书频道接入实战
-
-![封面图](./cover.png)
+---
+title: 从零开始给OpenClaw装上感官记忆和双手：第2课 让它开口说话
+cover: /home/shine/projects/AgentStudy/docs/config/3/cover.png
+---
 
 先告诉你一个尴尬的事实：第1课配好之后，你的 OpenClaw 只能在电脑终端里用。这意味着——
 
@@ -14,7 +15,7 @@
 
 这节课，我手把手教你把它接到飞书，让你**用手机就能跟 AI 助手对话**。
 
-**进度提示：你正在看 2/12，配置完这节课，你的 AI 就能「开口说话」了。**
+![架构图](/home/shine/projects/AgentStudy/docs/config/3/architecture.png)
 
 ---
 
@@ -24,22 +25,17 @@ Channel 翻译成「频道」，但我觉得叫它**「接入渠道」**更直�
 
 **简单说**：Channel 是 OpenClaw 和外界对话的桥梁。没有 Channel，OpenClaw 就是个自闭的终端程序；有了 Channel，它才能「听得到」（接收消息）和「说得出」（发送回复）。
 
-![Channel 架构示意](./architecture.png)
-
 **OpenClaw 支持的 Channel 类型：**
 
 | Channel | 特点 | 适合谁 |
 |---------|------|--------|
-| **飞书 (feishu)** | 国内稳定，企业友好，配置中等 | 国内用户首选 |
-| **微信 (wechat)** | 覆盖广，但配置复杂，需额外工具 | 想接入个人微信 |
+| **飞书** | 国内稳定，企业友好，配置中等 | 国内用户首选 |
+| **微信** | 覆盖广，配置更简单 | 想接入个人微信 |
 | **Telegram** | 国际通用，配置简单 | 有科学上网条件 |
-| **Discord** | 社区氛围好，Bot生态成熟 | 开发者/技术社区 |
+| **Discord** | 社区氛围好 | 开发者/技术社区 |
 | **Slack** | 企业协作，集成度高 | 外企/团队协作 |
 
-**这节课选飞书**，因为：
-1. 国内访问稳定，不用科学上网
-2. 企业微信太封闭，个人微信配置太麻烦
-3. 飞书文档详细，遇到问题好排查
+**这节课选飞书**，因为国内访问稳定，不用科学上网，文档详细，遇到问题好排查。
 
 ---
 
@@ -53,7 +49,7 @@ Channel 翻译成「频道」，但我觉得叫它**「接入渠道」**更直�
 
 用飞书账号登录后，点击右上角的 **「创建应用」**。
 
-![飞书开放平台创建应用入口](./feishu-create-app.png)
+![飞书开放平台创建应用入口](/home/shine/projects/AgentStudy/docs/config/3/feishu-create-app.png)
 
 ### 1.2 填写应用信息
 
@@ -65,7 +61,7 @@ Channel 翻译成「频道」，但我觉得叫它**「接入渠道」**更直�
 
 点击 **「创建」**。
 
-**⚠️ 心理辅导**：这里不用纠结名字，后面可以随时改。先让它跑起来最重要。
+**心理辅导**：这里不用纠结名字，后面可以随时改。先让它跑起来最重要。
 
 ---
 
@@ -79,7 +75,7 @@ Channel 翻译成「频道」，但我觉得叫它**「接入渠道」**更直�
 
 找到 **「机器人」**，点击 **「添加」**。
 
-![添加机器人能力](./feishu-add-bot.png)
+![添加机器人能力](/home/shine/projects/AgentStudy/docs/config/3/feishu-add-bot.png)
 
 ### 2.2 配置机器人信息
 
@@ -108,9 +104,9 @@ Channel 翻译成「频道」，但我觉得叫它**「接入渠道」**更直�
 - **App ID**（应用 ID）：一串字母数字，类似 `cli_xxxxxxxxxx`
 - **App Secret**（应用密钥）：点击「查看」按钮显示，是一串很长的字符
 
-![凭证信息位置](./feishu-credentials.png)
+![凭证信息位置](/home/shine/projects/AgentStudy/docs/config/3/feishu-credentials.png)
 
-**⚠️ 重要提醒**：
+**重要提醒**：
 - App Secret 相当于密码，**不要泄露给任何人**
 - 建议现在就把这两个值复制到一个临时文本文件里，等下要用
 
@@ -132,35 +128,13 @@ Channel 翻译成「频道」，但我觉得叫它**「接入渠道」**更直�
 
 在左侧菜单点击 **「权限管理」** → **「申请权限」**。
 
-批量导入以下权限：
-```
-{
-  "scopes": {
-    "tenant": [
-      "aily:file:read",
-      "aily:file:write",
-      "application:application.app_message_stats.overview:readonly",
-      "application:application:self_manage",
-      "application:bot.menu:write",
-      "cardkit:card:read",
-      "cardkit:card:write",
-      "contact:user.employee_id:readonly",
-      "corehr:file:download",
-      "event:ip_list",
-      "im:chat.access_event.bot_p2p_chat:read",
-      "im:chat.members:bot_access",
-      "im:message",
-      "im:message.group_at_msg:readonly",
-      "im:message.p2p_msg:readonly",
-      "im:message:readonly",
-      "im:message:send_as_bot",
-      "im:resource"
-    ],
-    "user": ["aily:file:read", "aily:file:write", "im:chat.access_event.bot_p2p_chat:read"]
-  }
-}
-```
-![权限申请界面](./feishu-permissions.png)
+搜索并添加以下权限：
+
+- `im:message:send`（发送消息）
+- `im:message:readonly`（接收消息）
+- `im:chat:readonly`（读取群聊信息）
+
+![权限申请界面](/home/shine/projects/AgentStudy/docs/config/3/feishu-permissions.png)
 
 **添加完权限后，记得点击「申请」**，等待飞书审核（通常是自动通过，秒过）。
 
@@ -193,7 +167,7 @@ OpenClaw 的飞书 Channel 支持两种接收消息的方式：
 
 - `im.message.receive_v1`（接收消息事件）
 
-![事件订阅配置](./feishu-event-subscription.png)
+![事件订阅配置](/home/shine/projects/AgentStudy/docs/config/3/feishu-event-subscription.png)
 
 ---
 
@@ -273,11 +247,11 @@ openclaw onboarding
 
 **如果一切正常**，你会看到 OpenClaw 回复你！
 
-![测试成功截图](./test-success.png)
+![测试成功截图](/home/shine/projects/AgentStudy/docs/config/3/test-success.png)
 
 ---
 
-## 常见问题 Q&A
+## 常见问题
 
 **Q: 长连接模式和 Webhook 模式有什么区别？**
 
@@ -295,46 +269,11 @@ A: 检查以下几点：
 
 A: 可以。把机器人添加到群聊后，@机器人发送消息，它会在群里回复。
 
-**Q: 配置后 OpenClaw 启动报错怎么办？**
-
-A: 检查 JSON 格式是否正确（引号、逗号）。可以用在线 JSON 校验工具检查。
-
-**Q: 我有多台设备运行 OpenClaw，会重复接收消息吗？**
-
-A: 飞书的长连接有排他性，同一时间只有一台设备能收到消息。如果需要在多台设备上运行，建议用 Webhook 模式配合负载均衡。
-
----
-
-## 进度检查 ✅
-
-完成这节课，你应该实现了：
-
-- [x] 在飞书开放平台创建了机器人应用
-- [x] 获取了 App ID、App Secret、Verification Token
-- [x] 配置了必要的权限
-- [x] 切换了事件接收方式为「长连接模式」
-- [x] 在 OpenClaw 中完成了 Channel 配置
-- [x] 在飞书中成功收到 AI 回复
-
-**进度：2/12 完成！**
-
----
-
-## 下一步预告
-
-现在你的 OpenClaw 能「开口说话」了，但它的知识还停留在训练数据截止日期之前，问它今天的新闻，它会一脸懵逼。
-
-下一课 **《第3课：打破知识茧房——给它装上实时搜索能力》**，我会教你配置 Brave Search，让 AI 能查最新的信息。
-
-**进度：3/12，我们下一篇见。**
-
 ---
 
 ## 附录：微信接入（更简单！）
 
 如果你更习惯用微信，OpenClaw 也支持接入个人微信，而且配置比飞书还简单。
-
-### 微信接入步骤
 
 **第一步**：在 OpenClaw 所在机器上执行：
 
@@ -350,11 +289,19 @@ npx -y @tencent-weixin/openclaw-weixin-cli@latest install
 
 ## 参考文档
 
-| 文档 | 地址 | 说明 |
-|------|------|------|
-| OpenClaw 飞书频道文档 | https://docs.openclaw.ai/channels/feishu | 官方配置指南 |
-| 飞书开放平台 | https://open.feishu.cn/app | 应用管理后台 |
+- OpenClaw 飞书频道文档：https://docs.openclaw.ai/channels/feishu
+- 飞书开放平台：https://open.feishu.cn/app
 
 ---
 
-*如果在配置过程中遇到问题，欢迎在评论区提问。报错信息贴上来，我帮你看看。*
+## 下一课预告
+
+现在你的 OpenClaw 能「开口说话」了，但它的知识还停留在训练数据截止日期之前，问它今天的新闻，它会一脸懵逼。
+
+下一课 **《第3课：打破知识茧房——给它装上实时搜索能力》**，我会教你配置 Brave Search，让 AI 能查最新的信息。
+
+**进度：2/12 完成！**
+
+---
+
+*如果在配置过程中遇到问题，欢迎在评论区留言。报错信息贴上来，我帮你看看。*
