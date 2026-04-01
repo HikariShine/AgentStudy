@@ -55,7 +55,7 @@
 | OpenClaw搭建过程 | **从零开始给OpenClaw装上感官记忆和双手（预告）** | 2026-03-29 | [文章](./docs/config/1/OpenClaw搭建与配置系列预告.md) | 📢 已发布 | [公众号](https://mp.weixin.qq.com/s/BTuuofexLyJ04c-_TmJZVQ) | 📢 已发布 | [B站](https://www.bilibili.com/video/BV1CQXSBLEjW) |
 | OpenClaw的大脑-首次安装配置模型 | **第1课：给它装个大脑——Provider和Model配置入门** | 2026-03-30 | [文章](./docs/config/2/第1课-给它装个大脑-Provider和Model配置入门.md) | 📢 已发布 | [公众号](https://mp.weixin.qq.com/s/kvD81qvq0tKbiKXYCItfKg) | 📢 已发布 | [B站](https://www.bilibili.com/video/BV1rsXYBfEK2) |
 | OpenClaw的对话-Channel的配置 | **第2课：让它开口说话——飞书/微信频道接入实战** | 2026-03-31 | [文章](./docs/config/3/第2课-让它开口说话-飞书频道接入实战.md) | 📢 已发布 | [公众号](https://mp.weixin.qq.com/s/N5H0DEQbwVi_zOVh3EyinQ) | 📢 已发布 | [B站](https://www.bilibili.com/video/BV1WdX6BQEWB) |
-| OpenClaw获取实时信息 | **第3课：打破知识茧房——给它装上实时搜索能力** | 2026-04-01 | [文章](./docs/config/4/第3课-打破知识茧房-实时搜索能力配置.md) | 📢 已发布 | [公众号](https://mp.weixin.qq.com/s/3qp7on_wQorgEjAnXZNHeQ) | ⏳ 未开始 | - |
+| OpenClaw获取实时信息 | **第3课：打破知识茧房——给它装上实时搜索能力** | 2026-04-01 | [文章](./docs/config/4/第3课-打破知识茧房-实时搜索能力配置.md) | 📢 已发布 | [公众号](https://mp.weixin.qq.com/s/3qp7on_wQorgEjAnXZNHeQ) | 📢 已发布 | [B站](https://www.bilibili.com/video/BV1vF9EBCEei) |
 | OpenClaw看懂图片 | **第4课：睁眼看世界——多模态图片理解配置** | - | - | ⏳ 未开始 | - | ⏳ 未开始 | - |
 | OpenClaw学会画画 | **第5课：不只看得懂，还能画得出——文生图配置指南** | - | - | ⏳ 未开始 | - | ⏳ 未开始 | - |
 | OpenClaw开口说话 | **第6课：让AI开口——TTS语音回复配置全攻略** | - | - | ⏳ 未开始 | - | ⏳ 未开始 | - |
