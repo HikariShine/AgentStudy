@@ -57,7 +57,7 @@
 | OpenClaw的对话-Channel的配置 | **第2课：让它开口说话——飞书/微信频道接入实战** | 2026-03-31 | [文章](./docs/config/3/第2课-让它开口说话-飞书频道接入实战.md) | 📢 已发布 | [公众号](https://mp.weixin.qq.com/s/N5H0DEQbwVi_zOVh3EyinQ) | 📢 已发布 | [B站](https://www.bilibili.com/video/BV1WdX6BQEWB) |
 | OpenClaw获取实时信息 | **第3课：打破知识茧房——给它装上实时搜索能力** | 2026-04-01 | [文章](./docs/config/4/第3课-打破知识茧房-实时搜索能力配置.md) | 📢 已发布 | [公众号](https://mp.weixin.qq.com/s/3qp7on_wQorgEjAnXZNHeQ) | 📢 已发布 | [B站](https://www.bilibili.com/video/BV1vF9EBCEei) |
 | OpenClaw看懂图片 | **第4课：睁眼看世界——多模态图片理解配置** | 2026-04-02 | [文章](./docs/config/5/第4课-睁眼看世界-多模态图片理解配置.md) | 📢 已发布 | [公众号](https://mp.weixin.qq.com/s/xZv_AL1L8Ln0fY4wSebR6A) | 📢 已发布 | [B站](https://www.bilibili.com/video/BV1U7XZBrEqj) |
-| OpenClaw学会画画 | **第5课：不只看得懂，还能画得出——文生图配置指南** | 2026-04-03 | [文章](./docs/config/6/第5课-不只看得懂还能画得出-文生图配置指南.md) | 📢 已发布 | [公众号](https://mp.weixin.qq.com/s/ALL7w4q2mzZFrDM1nh5pBg) | 🔄 已生成 | - |
+| OpenClaw学会画画 | **第5课：不只看得懂，还能画得出——文生图配置指南** | 2026-04-03 | [文章](./docs/config/6/第5课-不只看得懂还能画得出-文生图配置指南.md) | 📢 已发布 | [公众号](https://mp.weixin.qq.com/s/ALL7w4q2mzZFrDM1nh5pBg) | 📢 已发布 | [B站](https://www.bilibili.com/video/BV1ue9MB6EFo) |
 | OpenClaw开口说话 | **第6课：让AI开口——TTS语音回复配置全攻略** | - | - | ⏳ 未开始 | - | ⏳ 未开始 | - |
 | OpenClaw听懂语音 | **第7课：不只是打字聊天——语音消息识别配置** | - | - | ⏳ 未开始 | - | ⏳ 未开始 | - |
 | OpenClaw看懂视频 | **第8课：看视频不用自己看——AI视频分析能力配置** | - | - | ⏳ 未开始 | - | ⏳ 未开始 | - |
