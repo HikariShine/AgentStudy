@@ -60,8 +60,8 @@
 | OpenClaw学会画画 | **第5课：不只看得懂，还能画得出——文生图配置指南** | 2026-04-03 | [文章](./docs/config/6/第5课-不只看得懂还能画得出-文生图配置指南.md) | 📢 已发布 | [公众号](https://mp.weixin.qq.com/s/ALL7w4q2mzZFrDM1nh5pBg) | 📢 已发布 | [B站](https://www.bilibili.com/video/BV1ue9MB6EFo) |
 | OpenClaw开口说话 | **第6课：听听AI的声音——TTS语音回复配置全攻略** | 2026-04-06 | [文章](./docs/config/7/第6课-听听AI的声音-TTS语音回复配置全攻略.md) | 📢 已发布 | [公众号](https://mp.weixin.qq.com/s/x27PCG0NhkQCuGCpO-KkZw) | 📢 已发布 | [B站](https://www.bilibili.com/video/BV1mvSfBTEkc) |
 | OpenClaw听懂语音 | **第7课：让他听懂说话——语音消息识别配置** | 2026-04-07 | [文章](./docs/config/8/第7课-让他听懂说话-语音消息识别配置.md) | 📢 已发布 | [公众号](https://mp.weixin.qq.com/s/EU0vM465qraKWk6AC7zcEw) | 📢 已发布 | [B站](https://www.bilibili.com/video/BV12CDvBqE5f) |
-| OpenClaw看懂视频 | **第8课：看视频不用自己看——AI视频分析能力配置** | - | - | ⏳ 未开始 | - | ⏳ 未开始 | - |
-| OpenClaw制作视频 | **第9课：从文案到成片——用NotebookLM自动生成视频** | - | - | ⏳ 未开始 | - | ⏳ 未开始 | - |
+| OpenClaw看懂视频 | **第8课：让他看懂视频——AI视频分析能力配置** | 2026-04-08 | [文章](./docs/config/9/第8课-让他看懂视频-AI视频分析能力配置.md) | 📢 已发布 | [公众号](https://mp.weixin.qq.com/s/xjs4wRlfEhhrL1w4IQTLFA) | 📢 已发布 | [B站](https://www.bilibili.com/video/BV1NiD7BJE7Q) |
+| OpenClaw制作视频 | **第9课：学会制作视频——视频生成功能配置** | 2026-04-09 | [文章](./docs/config/10/第9课-学会制作视频——视频生成功能配置.md) | 📢 已发布 | [公众号](https://mp.weixin.qq.com/s/EVdOxOCso2l6KkMQ_Op4SA) | 📢 已发布 | [B站](https://www.bilibili.com/video/BV13qDxBDE19) |
 | OpenClaw使用浏览器 | **第10课：给它一双手——浏览器自动化操作配置** | - | - | ⏳ 未开始 | - | ⏳ 未开始 | - |
 | 记住重要的事情 | **第11课：告别"金鱼记忆"——长期记忆系统配置** | - | - | ⏳ 未开始 | - | ⏳ 未开始 | - |
 | 追忆过去 | **第12课：想找回半年前的对话？——全文记忆检索配置** | - | - | ⏳ 未开始 | - | ⏳ 未开始 | - |

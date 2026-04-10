@@ -3,6 +3,8 @@ title: 从零开始给OpenClaw装上感官记忆和双手：第4课 睁眼看世
 cover: /home/shine/projects/AgentStudy/docs/config/5/cover.jpg
 ---
 
+![封面图](/home/shine/projects/AgentStudy/docs/config/5/cover.jpg)
+
 > **进度：4/12，这是让你的 AI 从"文字助手"升级为"视觉助手"的关键一步。**
 
 ## 你的 AI 还是"瞎子"吗？
@@ -140,6 +142,8 @@ openclaw restart
 ### 测试方式一：直接发图片
 
 在飞书里直接发一张图给 OpenClaw，看它能不能描述内容。
+
+![测试截图](/home/shine/projects/AgentStudy/docs/config/5/test-screenshot.png)
 
 ### 测试方式二：图片+文字提问
 
