@@ -62,7 +62,7 @@
 | OpenClaw听懂语音 | **第7课：让他听懂说话——语音消息识别配置** | 2026-04-07 | [文章](./docs/config/8/第7课-让他听懂说话-语音消息识别配置.md) | 📢 已发布 | [公众号](https://mp.weixin.qq.com/s/EU0vM465qraKWk6AC7zcEw) | 📢 已发布 | [B站](https://www.bilibili.com/video/BV12CDvBqE5f) |
 | OpenClaw看懂视频 | **第8课：让他看懂视频——AI视频分析能力配置** | 2026-04-08 | [文章](./docs/config/9/第8课-让他看懂视频-AI视频分析能力配置.md) | 📢 已发布 | [公众号](https://mp.weixin.qq.com/s/xjs4wRlfEhhrL1w4IQTLFA) | 📢 已发布 | [B站](https://www.bilibili.com/video/BV1NiD7BJE7Q) |
 | OpenClaw制作视频 | **第9课：学会制作视频——视频生成功能配置** | 2026-04-09 | [文章](./docs/config/10/第9课-学会制作视频——视频生成功能配置.md) | 📢 已发布 | [公众号](https://mp.weixin.qq.com/s/EVdOxOCso2l6KkMQ_Op4SA) | 📢 已发布 | [B站](https://www.bilibili.com/video/BV13qDxBDE19) |
-| OpenClaw使用浏览器 | **第10课：给它一双手——浏览器自动化操作配置** | - | - | ⏳ 未开始 | - | ⏳ 未开始 | - |
+| OpenClaw使用浏览器 | **第10课：给它一双手——浏览器自动化操作配置** | 2026-04-13 | [文章](./docs/config/11/第10课-给它一双手-浏览器自动化操作配置.md) | 📢 已发布 | [公众号](https://mp.weixin.qq.com/s/1dMXi5VkBAA0Cqiflij1xQ) | 📢 已发布 | [B站](https://www.bilibili.com/video/BV1EdQtBgE8y) |
 | 记住重要的事情 | **第11课：告别"金鱼记忆"——长期记忆系统配置** | - | - | ⏳ 未开始 | - | ⏳ 未开始 | - |
 | 追忆过去 | **第12课：想找回半年前的对话？——全文记忆检索配置** | - | - | ⏳ 未开始 | - | ⏳ 未开始 | - |
 
